@@ -1,9 +1,9 @@
 param([string]$adminpassword)
 
 mkdir C:\TEMP -ErrorAction SilentlyContinue
-$env:TEMP = "C:\TEMP"
-$env:TMP = "C:\TEMP"
-$InstallDir='C:\choco'
+$env:TEMP = "C:\\TEMP"
+$env:TMP = "C:\\TEMP"
+$InstallDir='C:\\choco'
 $env:ChocolateyInstall="$InstallDir"
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
