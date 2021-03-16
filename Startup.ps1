@@ -6,7 +6,7 @@ param (
     [string]$password
 )
 
-Invoke-Expression "C:\\AMT\\deploy_sql_express_choco.ps1 -adminpassword $password"
+Invoke-Expression "C:\\AMT\\DeployCobol.ps1  -adminuser $username -adminpassword $password"
      
 
 
