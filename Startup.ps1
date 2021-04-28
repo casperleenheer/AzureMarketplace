@@ -5,7 +5,7 @@ param (
     [string]$password,
     [string]$sqlserver,
     [string]$sqladmin,
-    [string]$sqlpassword
+    [string]$sqlpassword,
     [string[]]$online,
     [string[]]$batch
 )
