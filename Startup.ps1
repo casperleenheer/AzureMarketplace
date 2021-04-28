@@ -6,8 +6,8 @@ param (
     [string]$sqlserver,
     [string]$sqladmin,
     [string]$sqlpassword,
-    [string[]]$online,
-    [string[]]$batch
+    [object[]]$online,
+    [object[]]$batch
 )
 
 Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber
