@@ -6,11 +6,12 @@ param (
     [string]$sqlserver,
     [string]$sqladmin,
     [string]$sqlpassword,
-    [object[]]$online,
-    [object[]]$batch
+    [object]$amtSettings
+
 )
 
 Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber
+Write-Host $amtSettings
 Invoke-Expression "C:\\AMT\\FixSettings.ps1 -sqlserver $sqlserver" -Verbose
 Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
 
