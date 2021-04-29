@@ -6,7 +6,7 @@ param (
     [string]$sqlserver,
     [string]$sqladmin,
     [string]$sqlpassword,
-    [string]$amtSettings
+    $amtSettings
 
 )
 
