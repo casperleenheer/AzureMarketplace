@@ -11,7 +11,25 @@ param (
 )
 
 Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber
-Write-Host $amtSettings
+Write-Host "->$amtSettings<-"
+
+
+$s = $amtSettings
+
+
+#Export of json with template goes wrong. All "" are gone.
+#Doing some replacements to make it json again.
+$s = $s -replace '{', '{"'
+$s = $s -replace ':', '":"'
+$s = $s -replace '}', '"}'
+$s = $s -replace ',', ',"'
+$s = $s.Replace(":`"[", ":[")
+$s = $s.Replace("}`"}", "}}")
+$s = $s.Replace("},`"{", "},{")
+$s = $s.Replace(":`"{", ":{")
+$s = $s.Replace("}]`"}", "}]}")
+Write-Host "->$s<-"
+
 Invoke-Expression "C:\\AMT\\FixSettings.ps1 -sqlserver $sqlserver" -Verbose
 Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
 Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonString $amtSettings" -Verbose
