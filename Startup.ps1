@@ -35,9 +35,10 @@ if (-not $allinone)
   $jsonstring = $jsonstring.Replace(":`"{", ":{")
   $jsonstring = $jsonstring.Replace("}]`"}", "}]}")
   Write-Host "->$jsonstring<-"
-
+  
+  $json = ConvertFrom-Json -InputObject $jsonstring
   Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
-  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonstring $jsonstring" -Verbose
+  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -json $json" -Verbose
 }
 else 
 {
