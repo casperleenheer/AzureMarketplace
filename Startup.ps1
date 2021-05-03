@@ -24,23 +24,20 @@ if (-not $allinone)
   
   Write-Host "->$amtSettings<-"
   
-  $s = $amtSettings
-  $s = $s -replace '{', '{"'
-  $s = $s -replace ':', '":"'
-  $s = $s -replace '}', '"}'
-  $s = $s -replace ',', ',"'
-  $s = $s.Replace(":`"[", ":[")
-  $s = $s.Replace("}`"}", "}}")
-  $s = $s.Replace("},`"{", "},{")
-  $s = $s.Replace(":`"{", ":{")
-  $s = $s.Replace("}]`"}", "}]}")
-  Write-Host "->$s<-"
-
-  $json = ConvertFrom-Json -InputObject $s -ErrorAction Stop
-  Write-Host $json
+  $jsonstring = $amtSettings
+  $jsonstring = $jsonstring -replace '{', '{"'
+  $jsonstring = $jsonstring -replace ':', '":"'
+  $jsonstring = $jsonstring -replace '}', '"}'
+  $jsonstring = $jsonstring -replace ',', ',"'
+  $jsonstring = $jsonstring.Replace(":`"[", ":[")
+  $jsonstring = $jsonstring.Replace("}`"}", "}}")
+  $jsonstring = $jsonstring.Replace("},`"{", "},{")
+  $jsonstring = $jsonstring.Replace(":`"{", ":{")
+  $jsonstring = $jsonstring.Replace("}]`"}", "}]}")
+  Write-Host "->$jsonstring<-"
 
   Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
-  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -json $json" -Verbose
+  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonstring $jsonstring" -Verbose
 }
 else 
 {
