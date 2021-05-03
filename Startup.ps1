@@ -44,9 +44,10 @@ if ($allinone)
 else
 {
   Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
+  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -json $json" -Verbose
 }
 
-Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -json $json" -Verbose
+
 
 #Add AMT install script as a run once script during first login.
 #New-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\" -Name "Setup AMT" -Value 'pwsh.exe  -WorkingDirectory C:\AMT -ExecutionPolicy Bypass -File "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -WindowStyle Normal' -PropertyType "String" 
