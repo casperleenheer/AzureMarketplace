@@ -37,8 +37,8 @@ if (-not $allinone)
   Write-Host "->$jsonstring<-"
   
   $json = ConvertFrom-Json -InputObject $jsonstring
-  Invoke-Expression "C:\\AMT\\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword" -Verbose
-  Invoke-Expression "C:\\AMT\\AdjustEnvironmentFile.ps1 -json $json" -Verbose
+  C:\AMT\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword
+  C:\AMT\AdjustEnvironmentFile.ps1 -json $json
 }
 else 
 {
