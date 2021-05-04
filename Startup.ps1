@@ -19,7 +19,7 @@ Invoke-Expression "C:\\AMT\\FixSettings.ps1 -sqlserver $sqlserver" -Verbose
 
 if (-not $allinone)
 {
-  C:\AMT\AdjustEnvironmentFile.ps1 -json $amtSettings
+  pwsh.exe -ExecutionPolicy Unrestricted -File C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonstring $amtSettings
   C:\AMT\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword
 
 }
