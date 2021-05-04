@@ -19,26 +19,9 @@ Invoke-Expression "C:\\AMT\\FixSettings.ps1 -sqlserver $sqlserver" -Verbose
 
 if (-not $allinone)
 {
-  #Export of json with template goes wrong. All "" are gone.
-  #Doing some replacements to make it json again.
-  
-  Write-Host "->$amtSettings<-"
-  
-  $jsonstring = $amtSettings
-  $jsonstring = $jsonstring -replace '{', '{"'
-  $jsonstring = $jsonstring -replace ':', '":"'
-  $jsonstring = $jsonstring -replace '}', '"}'
-  $jsonstring = $jsonstring -replace ',', ',"'
-  $jsonstring = $jsonstring.Replace(":`"[", ":[")
-  $jsonstring = $jsonstring.Replace("}`"}", "}}")
-  $jsonstring = $jsonstring.Replace("},`"{", "},{")
-  $jsonstring = $jsonstring.Replace(":`"{", ":{")
-  $jsonstring = $jsonstring.Replace("}]`"}", "}]}")
-  Write-Host "->$jsonstring<-"
-  
-  $json = ConvertFrom-Json -InputObject $jsonstring
+  C:\AMT\AdjustEnvironmentFile.ps1 -json $amtSettings
   C:\AMT\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword
-  C:\AMT\AdjustEnvironmentFile.ps1 -json $json
+
 }
 else 
 {
