@@ -7,7 +7,8 @@ param (
     [string]$sqladmin,
     [string]$sqlpassword,
     [string]$amtSettings,
-    [switch]$allinone
+    [switch]$allinone,
+    [object]$envSettings
 
 )
 
@@ -20,6 +21,7 @@ C:\AMT\FixSettings.ps1 -sqlserver $sqlserver
 if (-not $allinone)
 {
   $amtSettings | Out-File "C:\AMT\AmtSettings.json"
+  $envSettings | Out-File "C:\AMT\EnvSettings.json"
   #pwsh.exe -ExecutionPolicy Unrestricted -File C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonstring $amtSettings
   $value = 'pwsh.exe  -WorkingDirectory C:\AMT -ExecutionPolicy Bypass -File "C:\AMT\AdjustEnvironmentFile.ps1" -jsonstring ' + $amtSettings + ' -WindowStyle Normal -NoExit'
   New-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\" -Name "Adjust AMT xml" -Value 'pwsh.exe  -WorkingDirectory C:\AMT -ExecutionPolicy Bypass -File "C:\AMT\AdjustEnvironmentFile.ps1" -WindowStyle Normal' -PropertyType "String" 
