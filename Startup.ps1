@@ -19,8 +19,10 @@ C:\AMT\FixSettings.ps1 -sqlserver $sqlserver
 #There are two flavours: allinone, which has AMT and SQL on one box and flex which has multiple AMT boxes and a seperate SQL server
 if (-not $allinone)
 {
+  $amtSettings | Out-File "C:\AMT\AmtSettings.json"
   #pwsh.exe -ExecutionPolicy Unrestricted -File C:\\AMT\\AdjustEnvironmentFile.ps1 -jsonstring $amtSettings
-  New-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\" -Name "Adjust AMT xml" -Value 'pwsh.exe  -WorkingDirectory C:\AMT -ExecutionPolicy Bypass -File "C:\AMT\AdjustEnvironmentFile.ps1" -jsonstring $amtSettings -WindowStyle Normal -NoExit' -PropertyType "String" 
+  $value = 'pwsh.exe  -WorkingDirectory C:\AMT -ExecutionPolicy Bypass -File "C:\AMT\AdjustEnvironmentFile.ps1" -jsonstring ' + $amtSettings + ' -WindowStyle Normal -NoExit'
+  New-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce\" -Name "Adjust AMT xml" -Value $value -PropertyType "String" 
 
   C:\AMT\SetupAmt.ps1 -adminname $username -adminpassword $password -sqladminname $sqladmin -sqladminpassword $sqlpassword
 
