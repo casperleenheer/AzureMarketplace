@@ -8,7 +8,7 @@ param (
     [string]$sqlpassword,
     [string]$amtSettings,
     [switch]$allinone,
-    [switch]$installAmt
+    [boolean]$installAmt
 )
 
 Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber
