@@ -18,7 +18,7 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 #Set the sql server name
 C:\AMT\FixSettings.ps1 -sqlserver $sqlserver
 
-#There are two flavours: allinone, which has AMT and SQL on one box and flex which has multiple AMT boxes and a seperate SQL server
+#There are two flavours: allinone, which has AMT and SQL on one box and distributed which has multiple AMT boxes and a seperate SQL server
 
 if (-not $allinone)
 {
