@@ -10,7 +10,10 @@ param (
     [switch]$allinone
 )
 
-Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber
+Start-Transcript -Path "C:\amt\transcript.txt" -NoClobber -Force
+
+#Disable Firewall on Server level, as it is behind Bastion this is ok.
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 
 #Set the sql server name
 C:\AMT\FixSettings.ps1 -sqlserver $sqlserver
